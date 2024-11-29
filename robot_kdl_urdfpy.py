@@ -15,12 +15,12 @@ class RobotKDL(object):
         
         self.robot_links_info = {}
         for link in self.robot.links:
-            print(link.name)
+            # print(link.name)
             self.robot_links_info[link.name] = link
 
         self.config = {}
         for joint in self.robot.actuated_joints:
-            print(f'assigning joint values:{joint.name} to 0.0')
+            # print(f'assigning joint values:{joint.name} to 0.0')
             self.config[joint.name] = 0.0
         
         self.arm_joints_name_order = arm_joints_name_order

@@ -44,13 +44,7 @@ def draw_arrow(image, point1, point2, axis_type=None):
     cv2.arrowedLine(image, tuple(point1), tuple(point2), color, 2)
     return image
 
-def draw_axes(image, arm_joint_state, hand_joint_state, image_name, target_path, robot_kdl, intrinsics, cam2base, base_axis):
-    os.makedirs(target_path, exist_ok=True)
-    
-    joint_values = {}
-    joint_values['arm'] = arm_joint_state
-    joint_values['hand'] = hand_joint_state
-
+def draw_axes(image, joint_values, image_name, target_path, robot_kdl, intrinsics, cam2base, base_axis):
     for link in robot_kdl.robot_links_info.keys():
         
         link_pose = robot_kdl.forward_kinematics(joint_values, link_name=link)
@@ -66,7 +60,6 @@ def draw_axes(image, arm_joint_state, hand_joint_state, image_name, target_path,
         pixels_y_axis = pixels[2]
         pixels_z_axis = pixels[3]
 
-        # image = draw_point(image, pixels)
         image = draw_arrow(image, pixels_origin, pixels_x_axis, axis_type='x')
         image = draw_arrow(image, pixels_origin, pixels_y_axis, axis_type='y')
         image = draw_arrow(image, pixels_origin, pixels_z_axis, axis_type='z')
